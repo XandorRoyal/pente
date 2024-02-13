@@ -2,7 +2,9 @@ var gameboard = [];
 var playerNum = 1;
 var gameBegan = true;
 
-const whiteIcon = "./public/assets/images/circleW.png"
+var buffer = 15;
+
+const whiteIcon = "./public/assets/images/CircleW.png"
 const blackIcon = "./public/assets/images/circle.png";
 
 function generateBoard(){
@@ -38,10 +40,13 @@ function getChildIndex(element) {
 }
 
 function generateCircle(element, mouseElement) {
+
     let columnIndex = getChildIndex(element);
     let rowIndex = getChildIndex(element.parentNode);
 
     let elementRect = element.getBoundingClientRect();
+
+    console.log(elementRect.left, elementRect.top)
 
     let halfWidth = ((elementRect.right - elementRect.left)/2);
     let halfHeight = ((elementRect.bottom - elementRect.top)/2);
@@ -69,6 +74,8 @@ function generateCircle(element, mouseElement) {
 
     let marginTop = up ? elementRect.top - halfHeight : elementRect.bottom - halfHeight;
     let marginLeft = left ? elementRect.left - halfWidth : elementRect.right - halfWidth;
+
+    marginTop -= buffer;
 
     circleImg.style = "margin-top: " + marginTop + "px;" + "margin-left: " + marginLeft + "px;";
 
