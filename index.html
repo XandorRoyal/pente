@@ -9,6 +9,38 @@
   </head>
   
   <body>
-    <table id="board"></table>
+    <h1>Pente Board Game</h1>
+    <div class="container">
+      <div class="board-border">
+        <table class="board" id="board"></table>
+      </div>
+      <section class="sidebar">
+        <div class="enter-container">
+          <input type="text" class="username-input" id ="player1" placeholder="Player 1" maxlength="20">
+          <input type="text" class="username-input" id="player2" placeholder="Player 2" maxlength="20">
+          <div class="button-container">
+            <div class="save-container">
+              <button class="name-button" onclick="saveUsernames()">Begin Game</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="start-container">
+          <div class="name-container">
+            <div class="player1-contaier">
+              <span id="player1-start">Key</span>
+            </div>
+            <img id="arrowImg" src="./public/images/arrow.png">
+            <div class="player2-contaier">
+              <span id="player2-start">Key</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+    
   </body>
 </html>

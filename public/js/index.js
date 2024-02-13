@@ -14,3 +14,15 @@ document.addEventListener("DOMContentLoaded", function() {
         board.appendChild(row);
     }
 });
+
+function saveUsernames() {
+    var player1Name = document.getElementById("player1").value;
+    var player2Name = document.getElementById("player2").value;
+    
+    document.getElementById("player1-start").innerText = player1Name;
+    document.getElementById("player2-start").innerText = player2Name;
+    
+    document.querySelector(".enter-container").style.display = "none";
+    document.querySelector(".start-container").style.display = "block";
+    
+}
