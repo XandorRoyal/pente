@@ -9,8 +9,8 @@ table {
 }
 
 td {
-    width: 40px; 
-    height: 40px; 
+    width: 35px; 
+    height: 30px; 
     background-color: #f0d9b5;
     border: 1px solid black;
 }
@@ -89,4 +89,8 @@ h1 {
 .chips {
     position: absolute;
     z-index: 5;
+}
+
+#main {
+    flex-direction: row;
 }
