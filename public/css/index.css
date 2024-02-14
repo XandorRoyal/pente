@@ -90,3 +90,7 @@ h1 {
     position: absolute;
     z-index: 5;
 }
+
+#main {
+    flex-direction: row;
+}
