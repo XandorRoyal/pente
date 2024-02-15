@@ -3,10 +3,18 @@ var playerNum = 1;
 var isPlayerWhite = false;
 var gameBegan = true;
 
+var whiteCapturedPieces = 0;
+var blackCapturedPieces = 0;
+
 var buffer = 15;
 
 const whiteIcon = "./public/assets/images/CircleW.png";
 const blackIcon = "./public/assets/images/circle.png";
+
+function gameWin() {
+    alert("Player "+playerNum+" has won!");
+    gameBegan = false;
+}
 
 function getChildIndex(element) {
     return Array.prototype.indexOf.call(element.parentNode.childNodes, element);
@@ -38,8 +46,6 @@ function generateBoard(){
     gameboard[gameboard.length-1][gameboard[gameboard.length-1].length] = 0;
 }
 
-var toRemove = [];
-
 function recursiveWalk(rowMod, colMod, coords, count, ecount) {
     if (coords[0] < 0 || coords[0] > gameboard.length-1 || coords[1] < 0 || coords[1] > gameboard[1].length-1) return count;
 
@@ -49,8 +55,10 @@ function recursiveWalk(rowMod, colMod, coords, count, ecount) {
     if (ecount == 2 && currentSquare == playerNum) {
         let previousCoord1 = [coords[0]-rowMod,coords[1]-colMod]
         let previousCoord2 = [coords[0]-(2*rowMod),coords[1]-(2*colMod)]
+
         gameboard[previousCoord1[0]][previousCoord1[1]] = 0
         gameboard[previousCoord2[0]][previousCoord2[1]] = 0
+
         document.getElementById(previousCoord1[0]+"|"+previousCoord1[1]).remove();
         document.getElementById(previousCoord2[0]+"|"+previousCoord2[1]).remove();
         return count;
@@ -75,16 +83,21 @@ function gameStep(row, column){
 
     let horizontalCount = (leftCount + rightCount) -1;
     let vericalCount = (upCount + downCount) -1;
-    let rightDiagonal = (upRightCount + downLeftCount) -1;
-    let leftDiagnoal = (upLeftCount + downRightCount) -1;
+    let rightDiagonalCount = (upRightCount + downLeftCount) -1;
+    let leftDiagnoalCount = (upLeftCount + downRightCount) -1;
 
-    let cumulativeArray = [horizontalCount, vericalCount, rightDiagonal, leftDiagnoal];
+    let cumulativeArray = [horizontalCount, vericalCount, rightDiagonalCount, leftDiagnoalCount];
 
     let max = Math.max(...cumulativeArray);
     console.log(max);
     if (max == 3) alert("Tria!");
     else if (max == 4) alert("Tessera!");
-    else if (max == 5) alert("Player "+playerNum+" has won!");
+    else if (max == 5) {
+        gameWin();
+        return;
+    }
+    if (playerNum == 1 && whiteCapturedPieces == 10) gameWin();
+    else if (playerNum == 2 && whiteCapturedPieces == 10) gameWin();
 }
 
 function switchTurns() {
