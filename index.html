@@ -15,6 +15,7 @@
       <div class="board-border">
         <table class="board" id="board"></table>
       </div>
+
       <section class="sidebar">
         <div class="enter-container">
           <input type="text" class="username-input" id ="player1" placeholder="Player 1" maxlength="20">
@@ -36,12 +37,14 @@
 
         <div class="start-container">
           <div class="name-container">
-            <div class="player1-contaier">
-              <span class="name-place" id="player1-start">Key</span>
+            <div class="player1-container">
+              <p class="label">Black</p>
+              <span class="name-place" id="player1-start"></span>
             </div>
             <img id="arrowImg" src="./public/images/arrow.png">
-            <div class="player2-contaier">
-              <span class="name-place" id="player2-start">Key</span>
+            <div class="player2-container">
+              <p class="label">White</p>
+              <span class="name-place" id="player2-start"></span>
             </div>
           </div>
 
@@ -52,14 +55,14 @@
 
           <div class="captured-container">
             <div>
-              <p>White Captured</p>
+              <p class="label2">White Captured</p>
               <span>2</span>
             </div>
 
             <div class="space"></div>
 
             <div>
-              <p>Black Captured</p>
+              <p class="label2">Black Captured</p>
               <span>2</span>
             </div>
           </div>

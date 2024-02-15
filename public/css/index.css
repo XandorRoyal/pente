@@ -42,6 +42,7 @@ h1 {
 
 .enter-container {
     text-align: center;
+    margin-top: 50%;
     /* display: none; */
 }
 
@@ -95,6 +96,7 @@ a {
 .start-container {
     display: none;
     text-align: center;
+    margin-top: 50%;
 }
 
 .start-container .name-container {
@@ -103,6 +105,8 @@ a {
 
 #arrowImg {
     width: 50px;
+    margin-top: 30px;
+    margin-left: 12px;
 }
 
 .name-container {
@@ -151,4 +155,14 @@ a {
     display: flex;
     justify-content: center;
     
+}
+
+.label {
+    margin: auto;
+    text-decoration: underline;
+    color: gray;
+}
+
+.label2 {
+    text-decoration: underline;
 }
