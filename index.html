@@ -24,21 +24,47 @@
               <button class="name-button" onclick="saveUsernames()">Begin Game</button>
             </div>
 
+            <div class="save-container">
+              <button class="tut-button">
+                <a href="./tutorial.html"> How to Play</a>
+              </button>
+            </div>
+            
+
           </div>
         </div>
 
         <div class="start-container">
           <div class="name-container">
             <div class="player1-contaier">
-              <span id="player1-start">Key</span>
+              <span class="name-place" id="player1-start">Key</span>
             </div>
             <img id="arrowImg" src="./public/images/arrow.png">
             <div class="player2-contaier">
-              <span id="player2-start">Key</span>
+              <span class="name-place" id="player2-start">Key</span>
             </div>
           </div>
-        </div>
 
+          <div class="timer-container">
+            <span class="turn-timer" id="turn-timer">30</span>
+            <span class="seconds">s</span>
+          </div>
+
+          <div class="captured-container">
+            <div>
+              <p>White Captured</p>
+              <span>2</span>
+            </div>
+
+            <div class="space"></div>
+
+            <div>
+              <p>Black Captured</p>
+              <span>2</span>
+            </div>
+          </div>
+
+        </div>
       </section>
 
     </div>
