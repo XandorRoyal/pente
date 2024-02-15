@@ -1,7 +1,7 @@
 var gameboard = [];
 var playerNum = 1;
 var isPlayerWhite = false;
-var gameBegan = true;
+var gameBegan = false;
 
 var whiteCapturedPieces = 0;
 var blackCapturedPieces = 0;
@@ -12,9 +12,19 @@ const whiteIcon = "./public/assets/images/CircleW.png";
 const blackIcon = "./public/assets/images/circle.png";
 
 function gameWin() {
-    alert("Player "+playerNum+" has won!");
+    let wonPlayerName = playerNum = 1 ? player1Name : player2Name;
+    alert(wonPlayerName +" has won!");
     gameBegan = false;
 }
+
+function updateCapturedBoard(){
+    let whiteCapturedElement = document.getElementById("whiteCaptured");
+    let blackCapturedElement = document.getElementById("blackCaptured");
+
+    whiteCapturedElement.innerHTML = whiteCapturedPieces;
+    blackCapturedElement.innerHTML = blackCapturedPieces;
+}
+
 
 function getChildIndex(element) {
     return Array.prototype.indexOf.call(element.parentNode.childNodes, element);
@@ -24,6 +34,7 @@ function generateBoard(){
     const boardSize = 19;
     const board = document.getElementById("board");
     const images = document.getElementById("images");
+
 
     for (let row = 0; row < boardSize; row++) {
         gameboard[row] = [];
@@ -46,6 +57,7 @@ function generateBoard(){
     gameboard[gameboard.length-1][gameboard[gameboard.length-1].length] = 0;
 }
 
+
 function recursiveWalk(rowMod, colMod, coords, count, ecount) {
     if (coords[0] < 0 || coords[0] > gameboard.length-1 || coords[1] < 0 || coords[1] > gameboard[1].length-1) return count;
 
@@ -61,6 +73,12 @@ function recursiveWalk(rowMod, colMod, coords, count, ecount) {
 
         document.getElementById(previousCoord1[0]+"|"+previousCoord1[1]).remove();
         document.getElementById(previousCoord2[0]+"|"+previousCoord2[1]).remove();
+
+        if (isPlayerWhite) blackCapturedPieces += 2;
+        else whiteCapturedPieces += 2;
+
+        updateCapturedBoard();
+
         return count;
     }
     if (count == 1 && currentSquare != playerNum && currentSquare != 0) {
@@ -89,7 +107,6 @@ function gameStep(row, column){
     let cumulativeArray = [horizontalCount, vericalCount, rightDiagonalCount, leftDiagnoalCount];
 
     let max = Math.max(...cumulativeArray);
-    console.log(max);
     if (max == 3) alert("Tria!");
     else if (max == 4) alert("Tessera!");
     else if (max == 5) {
@@ -160,8 +177,10 @@ function mouseClick(mouseElement) {
 }
 
 function saveUsernames() {
-    var player1Name = document.getElementById("player1").value;
-    var player2Name = document.getElementById("player2").value;
+    var player1Name = document.getElementById("player1").value.trim() == "" ? "Player 1" : document.getElementById("player1").value;
+    var player2Name = document.getElementById("player2").value.trim() == "" ? "Player 2" : document.getElementById("player2").value;
+
+    console.log(player1Name);
     
     document.getElementById("player1-start").innerText = player1Name;
     document.getElementById("player2-start").innerText = player2Name;
@@ -169,6 +188,7 @@ function saveUsernames() {
     document.querySelector(".enter-container").style.display = "none";
     document.querySelector(".start-container").style.display = "block";
     
+    gameBegan = true;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
