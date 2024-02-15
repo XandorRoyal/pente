@@ -42,7 +42,7 @@ h1 {
 
 .enter-container {
     text-align: center;
-    /* display: none; */
+    display: none;
 }
 
 .name-button {
@@ -70,8 +70,12 @@ h1 {
 }
 
 .start-container {
-    display: none;
+    /* display: none; */
     text-align: center;
+}
+
+.start-container .name-container {
+    justify-content: center;
 }
 
 #arrowImg {
@@ -83,7 +87,18 @@ h1 {
     flex-direction: row;
     align-items: center;
     text-align: center;
-    background-color: aqua;
+}
+
+.timer-container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    color: red;
+}
+
+.turn-timer {
+    font-size: 25px;
 }
 
 .chips {
@@ -93,4 +108,24 @@ h1 {
 
 #main {
     flex-direction: row;
+}
+
+.name-place {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 25px;
+}
+
+.seconds {
+    font-size: 25px;
+}
+
+.space {
+    margin: 40px;
+}
+
+.captured-container {
+    display: flex;
+    justify-content: center;
+    
 }
