@@ -131,6 +131,16 @@ a {
     justify-content: center;
 }
 
+.label {
+    margin: auto;
+    text-decoration: underline;
+    color: gray;
+}
+
+.label2 {
+    text-decoration: underline;
+}
+
 .flipped {
     transform: scaleX(-1);
 }
