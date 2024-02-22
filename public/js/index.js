@@ -1,4 +1,5 @@
 var gameboard = [];
+var gameboardMaster = []
 var playerNum = 1;
 var isPlayerWhite = false;
 var gameBegan = false;
@@ -10,6 +11,7 @@ var whiteCapturedPieces = 0;
 var blackCapturedPieces = 0;
 
 var buffer = 15;
+var displayTimeout = -1;
 
 const whiteIcon = "./public/assets/images/CircleW.png";
 const blackIcon = "./public/assets/images/circle.png";
@@ -19,16 +21,21 @@ function displayMessage(message) {
     messageContainer.innerText = message;
     messageContainer.style.display = "block";
 
-    setTimeout(() => {
+    console.log(displayTimeout);
+
+    displayTimeout = setTimeout(() => {
         messageContainer.style.display = "none";
-    }, 3000);
+    }, 4000);
 }
 
 function gameWin() {
     let wonPlayerName = playerNum === 1 ? player1Name : player2Name;
     displayMessage(wonPlayerName + " has won!");
+    console.log("works");
     gameBegan = false;
-    clearInterval(timerInterval); 
+    clearInterval(timerInterval);
+    document.getElementById("restart").style.display = "block";
+    console.log("cleared");
 }
 
 function updateCapturedBoard() {
@@ -40,7 +47,7 @@ function updateCapturedBoard() {
 }
 
 function startTimer() {
-    let seconds = 30;
+    let seconds = 35;
     const turnTimer = document.getElementById("turn-timer");
 
     turnTimer.innerText = seconds;
@@ -52,6 +59,8 @@ function startTimer() {
         if (seconds === 0) {
             clearInterval(timerInterval);
             switchTurns();
+        } else if (seconds == 5) {
+            displayMessage("5 Seconds left in turn!");
         }
     }, 1000);
 }
@@ -66,24 +75,24 @@ function generateBoard() {
     const images = document.getElementById("images");
 
     for (let row = 0; row < boardSize; row++) {
-        gameboard[row] = [];
+        gameboardMaster[row] = [];
         const rowElement = document.createElement("tr");
 
         for (let column = 0; column < boardSize; column++) {
-            gameboard[row][column] = 0;
+            gameboardMaster[row][column] = 0;
             const cell = document.createElement("td");
             cell.classList.add('element');
             rowElement.appendChild(cell);
         }
-        gameboard[row][gameboard[row].length] = 0;
+        gameboardMaster[row][gameboardMaster[row].length] = 0;
 
         board.appendChild(rowElement);
     }
-    gameboard[gameboard.length] = [];
+    gameboardMaster[gameboardMaster.length] = [];
     for (let column = 0; column < boardSize; column++) {
-        gameboard[gameboard.length - 1][column] = 0;
+        gameboardMaster[gameboardMaster.length - 1][column] = 0;
     }
-    gameboard[gameboard.length - 1][gameboard[gameboard.length - 1].length] = 0;
+    gameboardMaster[gameboardMaster.length - 1][gameboardMaster[gameboardMaster.length - 1].length] = 0;
 }
 
 function recursiveWalk(rowMod, colMod, coords, count, ecount) {
@@ -148,6 +157,8 @@ function gameStep(row, column) {
 }
 
 function switchTurns() {
+    if (!gameBegan) return;
+
     clearInterval(timerInterval);
 
     playerNum = playerNum == 1 ? 2 : 1;
@@ -225,7 +236,21 @@ function saveUsernames() {
 
     gameBegan = true;
 
+    document.getElementById("restart").style.display = "none";
+
+    gameboard = structuredClone(gameboardMaster);
+
+    images.innerHTML = null;
+
     startTimer();
+}
+
+function displayTriaMessage() {
+    displayMessage("Tria!");
+}
+
+function displayTesseraMessage() {
+    displayMessage("Tessera!");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -235,11 +260,3 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("click", (e) => {
     mouseClick(e);
 });
-
-function displayTriaMessage() {
-    displayMessage("Tria!");
-}
-
-function displayTesseraMessage() {
-    displayMessage("Tessera!");
-}
