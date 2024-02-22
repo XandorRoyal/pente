@@ -1,6 +1,6 @@
 var gameboard = [];
 var gameboardMaster = []
-var playerNum = 1;
+var playerNum = 2;
 var isPlayerWhite = false;
 var gameBegan = false;
 var timerInterval;
@@ -147,10 +147,7 @@ function gameStep(row, column) {
         displayTesseraMessage();
     }
 
-    if (whiteCapturedPieces >= 10) {
-        gameWin();
-        return;
-    } else if (blackCapturedPieces >= 10) {
+    if (whiteCapturedPieces >= 10 || blackCapturedPieces >= 10) {
         gameWin();
         return;
     }
