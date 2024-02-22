@@ -21,7 +21,6 @@ function displayMessage(message) {
     messageContainer.innerText = message;
     messageContainer.style.display = "block";
 
-    console.log(displayTimeout);
 
     displayTimeout = setTimeout(() => {
         messageContainer.style.display = "none";
@@ -31,11 +30,9 @@ function displayMessage(message) {
 function gameWin() {
     let wonPlayerName = playerNum === 1 ? player1Name : player2Name;
     displayMessage(wonPlayerName + " has won!");
-    console.log("works");
     gameBegan = false;
     clearInterval(timerInterval);
     document.getElementById("restart").style.display = "block";
-    console.log("cleared");
 }
 
 function updateCapturedBoard() {
