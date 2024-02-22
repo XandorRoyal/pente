@@ -164,6 +164,16 @@ function switchTurns() {
     playerNum = playerNum == 1 ? 2 : 1;
     isPlayerWhite = !isPlayerWhite;
 
+    if (whiteCapturedPieces >= 10) {
+        displayMessage(player1Name + " has won by capturing 10 tiles!");
+        gameBegan = false;
+        return;
+    } else if (blackCapturedPieces >= 10) {
+        displayMessage(player2Name + " has won by capturing 10 tiles!");
+        gameBegan = false;
+        return;
+    }
+
     const arrowImg = document.getElementById("arrowImg");
     arrowImg.classList.toggle("flipped", isPlayerWhite);
 
